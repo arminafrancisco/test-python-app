@@ -1,19 +1,13 @@
-<html>
-	<head>
-			<title>AF Python App</title>
-	</head>
-	<body>
-		<div>
-			<h1><a href="">Welcome to Armina's First Python App!</a></h1>
-			<h4>I hope this turns out to be a beautiful blog!</h4>
-		</div>
+{% extends "blog/base.html" %}
 
-		{% for post in posts %}
-			<div>
-				<p>published: {{ post.published_date }}</p>
-				<h1><a href="">{{ post.title }}</a></h1>
-				<p>{{ post.text|linebreaks }}</p>
+{% block content %}
+	{% for post in posts %}
+		<div class="post">
+			<div class="date">
+				<p>Published: {{ post.published_date }}</p>
 			</div>
-			{% endfor %}
-	</body>
-</html>
+			<h1><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
+			<p>{{ post.text|linebreaks }}</p>
+		</div>
+	{% endfor %}
+{% endblock content %}
